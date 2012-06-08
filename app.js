@@ -5,7 +5,8 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , port = process.env.PORT || 3000;
+  , port = process.env.PORT || 3000
+  , dbm = require('./node_modules/dogears_db_mgr/de_dbm');
 
 var app = module.exports = express.createServer();
 
@@ -31,6 +32,12 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
+
+app.post('/users/create', function(req, res, next) {
+  dbm.collection.find().toArray(function(err, results) {
+    res.end(JSON.stringify(results));
+  });
+});
 
 app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -1,2 +1,14 @@
 h1= title
-p Welcome to #{title}
+div#signup_container
+    h3 Signup
+    hr
+    form#signup_form
+        label(for="user_name") Email:
+        input#user_name(type="text")
+        label(for="password") Password:
+        input#password(type="password")
+        input#signup_submit(type="submit", value="Submit")
+div#downloads_container
+    h3 Download the extensions
+    hr
+    a(href="https://github.com/beezee/chrome-dogears") Dogears for Google Chrome
