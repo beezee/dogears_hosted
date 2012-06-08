@@ -34,9 +34,9 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.post('/users/create', function(req, res, next) {
+app.post('/users/new', function(req, res, next) {
   dbm.collection.find().toArray(function(err, results) {
-    res.end(JSON.stringify(results));
+    res.end(JSON.stringify(err)+results.length+JSON.stringify(results));
   });
 });
 
