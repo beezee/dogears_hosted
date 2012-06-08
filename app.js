@@ -36,7 +36,7 @@ app.get('/', routes.index);
 
 app.post('/users/new', function(req, res, next) {
   dbm.collection.insert({email: req.body.u, password: req.body.p}, function(err, docs) {
-    var response = {status: err} || {status: 'success'};
+    var response = (err) ? {status: err} : {status: 'success'};
     res.end(JSON.stringify(response));
   });
 });
