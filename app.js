@@ -36,7 +36,7 @@ app.get('/', routes.index);
 
 app.post('/users/new', function(req, res, next) {
   dbm.collection.find().toArray(function(err, results) {
-    res.end(JSON.stringify(err)+results.length+JSON.stringify(results));
+    res.end(JSON.stringify(err)+results.length+JSON.stringify(results)+req.body);
   });
 });
 
