@@ -35,9 +35,12 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 app.post('/users/new', function(req, res, next) {
-  dbm.collection.insert({email: req.body.u, password: req.body.p}, function(err, docs) {
-    var response = (err) ? {status: err} : {status: 'success'};
-    res.end(JSON.stringify(response));
+  dbm.collection.find({email: req.body.u}).toArray(function(err, results) {
+    if (!err && results.length > 0) res.end(JSON.stringify({status: 'Sorry, looks like that email address is already registered.'}));
+    else dbm.collection.insert({email: req.body.u, password: req.body.p}, function(err, docs) {
+      var response = (err) ? {status: err} : {status: 'success'};
+      res.end(JSON.stringify(response));
+    });
   });
 });
 
